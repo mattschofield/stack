@@ -44,7 +44,7 @@ resource "aws_db_subnet_group" "main" {
   subnet_ids  = ["${split(",", var.subnet_ids)}"]
 }
 
-resource "aws_db_instance" "default" {
+resource "aws_db_instance" "main" {
   allocated_storage      = "${var.allocated_storage}"
   engine                 = "${var.engine}"
   engine_version         = "${lookup(var.engine_version, var.engine)}"
@@ -58,11 +58,11 @@ resource "aws_db_instance" "default" {
 
 # OUTPUTS
 output "subnet_group" {
-  value = "${aws_db_subnet_group.default.name}"
+  value = "${aws_db_subnet_group.main.name}"
 }
 output "db_instance_id" {
-  value = "${aws_db_instance.default.id}"
+  value = "${aws_db_instance.main.id}"
 }
 output "db_instance_address" {
-  value = "${aws_db_instance.default.address}"
+  value = "${aws_db_instance.main.address}"
 }
